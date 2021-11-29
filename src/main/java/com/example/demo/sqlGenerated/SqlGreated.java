@@ -18,7 +18,7 @@ import java.util.Map;
 public class SqlGreated {
 
     private static final String insert_sql = "REPLACE INTO staff_history_norm(id, created_at, updated_at, company_id, creator_id, modifier_id, advanced_setting_opened, challenge_value, complete_report_type_code, complete_value_importer_id, complete_value_importer_name, condition_importer_id, condition_importer_name, condition_input_type, condition_report_type_code, data_source, generation_method, guaranteed_value, norm_attribute, norm_code, norm_desc, norm_low_score, norm_name, norm_nature, norm_owner_id, norm_range, norm_standard, norm_top_score, norm_type_code, norm_type_name, quantization, score_input_method, score_option_list, score_unlimit, target_desc, target_value, use_challenge_value, use_complete_value, use_guaranteed_value, use_target_value, weight) \n";
-    private static final String value_sql = "    VALUE ('uuid', now(), now(), '0bef1a12ea8a426689f759aa6aab6781', 'creator_id', null, false, null, null, null, null, null, null, null, null, null, null, null, null, null, 'norm_desc', 0, 'norm_name', 'normNature_02', 'norm_owner_id', null, 'norm_standard', norm_top_score, 'norm_type_code', 'norm_type_name', null, 'DIRECT', null, null, null, null, false, false, false, false, null);\n\r";
+    private static final String value_sql = "    VALUE ('uuid', now(), now(), '0bef1a12ea8a426689f759aa6aab6781', 'creator_id', null, false, null, null, null, null, null, null, null, null, null, null, null, null, null, 'norm_desc', 0, 'norm_name', 'normNature_02', 'norm_owner_id', 'norm_range', 'norm_standard', norm_top_score, 'norm_type_code', 'norm_type_name', null, 'DIRECT', null, null, null, null, false, false, false, false, 100.0000);\n\r";
 
     private static final Map<String, String> normTypeCodeMap = new HashMap<>();
 
@@ -29,11 +29,12 @@ public class SqlGreated {
 
     public static void main(String[] args) throws IOException {
         List<String> uuids = UuidClass.uuids;
-        Map<String,String> staffInfoMap = StaffInfoGenerated.staffInfoMap;
-        readExcel(uuids, staffInfoMap);
+        Map<String,String> staffIdMap = StaffInfoGenerated.staffIdMap;
+        Map<String,String> departmentIdMap = StaffInfoGenerated.staffDepartmentIdMap;
+        readExcel(uuids, staffIdMap, departmentIdMap);
     }
 
-    private static void readExcel(List<String> uuids, Map<String,String> staffInfoMap) throws IOException {
+    private static void readExcel(List<String> uuids, Map<String,String> staffIdMap, Map<String,String> departmentIdMap) throws IOException {
         ExcelReader excelReader = ExcelUtil.getReader("C:\\Users\\3278\\Desktop\\指标库导入模板1(1).xls");
         File sqlFile = new File("C:\\Users\\3278\\Desktop\\自建指标导入.sql");
         FileOutputStream fileOutputStream = new FileOutputStream(sqlFile);
@@ -53,13 +54,14 @@ public class SqlGreated {
             StringBuffer sql = new StringBuffer();
             sql.append(insert_sql);
             String valueSql = value_sql.replace("uuid", uuid)
-                    .replace("creator_id", staffInfoMap.get(mobileNo))
+                    .replace("creator_id", staffIdMap.get(mobileNo))
                     .replace("norm_desc", normDesc)
                     .replace("norm_name", normName)
-                    .replace("norm_owner_id", staffInfoMap.get(mobileNo))
+                    .replace("norm_owner_id", staffIdMap.get(mobileNo))
                     .replace("norm_type_code", normTypeCodeMap.get(normTypeName))
                     .replace("norm_type_name", normTypeName)
                     .replace("norm_standard", normStandard)
+                    .replace("norm_range", departmentIdMap.get(mobileNo))
                     .replace("norm_top_score", topScore);
 
             sql.append(valueSql);
