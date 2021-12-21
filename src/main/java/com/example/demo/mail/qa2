@@ -1,0 +1,89 @@
+DEBUG: JavaMail version 1.6.1
+DEBUG: successfully loaded resource: /META-INF/javamail.default.providers
+DEBUG: Tables of loaded providers
+DEBUG: Providers Listed By Class Name: {com.sun.mail.smtp.SMTPSSLTransport=javax.mail.Provider[TRANSPORT,smtps,com.sun.mail.smtp.SMTPSSLTransport,Oracle], com.sun.mail.smtp.SMTPTransport=javax.mail.Provider[TRANSPORT,smtp,com.sun.mail.smtp.SMTPTransport,Oracle], com.sun.mail.imap.IMAPSSLStore=javax.mail.Provider[STORE,imaps,com.sun.mail.imap.IMAPSSLStore,Oracle], com.sun.mail.pop3.POP3SSLStore=javax.mail.Provider[STORE,pop3s,com.sun.mail.pop3.POP3SSLStore,Oracle], com.sun.mail.imap.IMAPStore=javax.mail.Provider[STORE,imap,com.sun.mail.imap.IMAPStore,Oracle], com.sun.mail.pop3.POP3Store=javax.mail.Provider[STORE,pop3,com.sun.mail.pop3.POP3Store,Oracle]}
+DEBUG: Providers Listed By Protocol: {imaps=javax.mail.Provider[STORE,imaps,com.sun.mail.imap.IMAPSSLStore,Oracle], imap=javax.mail.Provider[STORE,imap,com.sun.mail.imap.IMAPStore,Oracle], smtps=javax.mail.Provider[TRANSPORT,smtps,com.sun.mail.smtp.SMTPSSLTransport,Oracle], pop3=javax.mail.Provider[STORE,pop3,com.sun.mail.pop3.POP3Store,Oracle], pop3s=javax.mail.Provider[STORE,pop3s,com.sun.mail.pop3.POP3SSLStore,Oracle], smtp=javax.mail.Provider[TRANSPORT,smtp,com.sun.mail.smtp.SMTPTransport,Oracle]}
+DEBUG: successfully loaded resource: /META-INF/javamail.default.address.map
+DEBUG: getProvider() returning javax.mail.Provider[TRANSPORT,smtp,com.sun.mail.smtp.SMTPTransport,Oracle]
+DEBUG SMTP: useEhlo true, useAuth true
+
+DEBUG SMTP: trying to connect to host "smtp.office365.com", port 587, isSSL false
+
+220 HK0PR01CA0055.outlook.office365.com Microsoft ESMTP MAIL Service ready at Mon, 20 Dec 2021 13:05:21 +0000
+
+DEBUG SMTP: connected to host "smtp.office365.com", port: 587
+
+EHLO ihr360-authorization-center-provider-6c5b84945d-d4hqv
+
+250-HK0PR01CA0055.outlook.office365.com Hello [112.64.175.162]
+
+250-SIZE 157286400
+250-PIPELINING
+250-DSN
+250-ENHANCEDSTATUSCODES
+250-STARTTLS
+250-8BITMIME
+250-BINARYMIME
+250-CHUNKING
+250 SMTPUTF8
+DEBUG SMTP: Found extension "SIZE", arg "157286400"
+DEBUG SMTP: Found extension "PIPELINING", arg ""
+DEBUG SMTP: Found extension "DSN", arg ""
+DEBUG SMTP: Found extension "ENHANCEDSTATUSCODES", arg ""
+DEBUG SMTP: Found extension "STARTTLS", arg ""
+DEBUG SMTP: Found extension "8BITMIME", arg ""
+DEBUG SMTP: Found extension "BINARYMIME", arg ""
+DEBUG SMTP: Found extension "CHUNKING", arg ""
+DEBUG SMTP: Found extension "SMTPUTF8", arg ""
+STARTTLS
+220 2.0.0 SMTP server ready
+
+EHLO ihr360-authorization-center-provider-6c5b84945d-d4hqv
+
+250-HK0PR01CA0055.outlook.office365.com Hello [112.64.175.162]
+
+250-SIZE 157286400
+
+250-PIPELINING
+
+250-DSN
+
+250-ENHANCEDSTATUSCODES
+
+250-AUTH LOGIN XOAUTH2
+
+250-8BITMIME
+
+250-BINARYMIME
+
+250-CHUNKING
+
+250 SMTPUTF8
+
+DEBUG SMTP: Found extension "SIZE", arg "157286400"
+
+DEBUG SMTP: Found extension "PIPELINING", arg ""
+
+DEBUG SMTP: Found extension "DSN", arg ""
+
+DEBUG SMTP: Found extension "ENHANCEDSTATUSCODES", arg ""
+
+DEBUG SMTP: Found extension "AUTH", arg "LOGIN XOAUTH2"
+
+DEBUG SMTP: Found extension "8BITMIME", arg ""
+
+DEBUG SMTP: Found extension "BINARYMIME", arg ""
+
+DEBUG SMTP: Found extension "CHUNKING", arg ""
+
+DEBUG SMTP: Found extension "SMTPUTF8", arg ""
+
+DEBUG SMTP: protocolConnect login, host=smtp.office365.com, user=huohuo5234@outlook.sg, password=<non-null>
+
+DEBUG SMTP: Attempt to authenticate using mechanisms: LOGIN PLAIN DIGEST-MD5 NTLM XOAUTH2
+
+DEBUG SMTP: Using mechanism LOGIN
+
+DEBUG SMTP: AUTH LOGIN command trace suppressed
+
+DEBUG SMTP: AUTH LOGIN failed

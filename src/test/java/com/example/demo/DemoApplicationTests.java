@@ -8,10 +8,12 @@ class DemoApplicationTests {
 
     @Test
     void contextLoads() {
-        // cid:a63b33f6-ead7-46ce-bc77-e3b5fbcbc5f9&fileName=th.jpg
-        // cid:a63b33f6-ead7-46ce-bc77-e3b5fbcbc5f9
-        String str = "<img src=\"cid:a63b33f6-ead7-46ce-bc77-e3b5fbcbc5f9&fileName=th - 啊啊.jpg\" title=\"th.jpg\" alt=\"th.jpg\" />";
-        str = str.replaceAll("(cid:)([a-zA-Z0-9-]*)([^&\\S*\\s*])(\"$)", "$1$2");
-        System.out.println(str);
+        String str = " ";
+        String str2 = " ";
+        String str3 = " ";
+
+        System.out.println(str.getBytes());
+        System.out.println(str2.getBytes());
+        System.out.println(123);
     }
 }
