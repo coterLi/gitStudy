@@ -1,46 +1,59 @@
 package com.example.demo;
 
-import cn.hutool.core.io.FileUtil;
-import cn.hutool.core.text.csv.CsvReader;
-import cn.hutool.core.text.csv.CsvUtil;
-import org.junit.jupiter.api.Test;
-import org.junit.platform.commons.util.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.core.env.Environment;
 
-import java.io.Reader;
-import java.nio.charset.StandardCharsets;
-import java.util.List;
-import java.util.Map;
+import com.alibaba.fastjson.JSONObject;
+import com.example.demo.i18nResolve.Student;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.text.translate.UnicodeEscaper;
+import org.apache.commons.text.translate.UnicodeUnescaper;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 class DemoApplicationTests {
 
-    @Autowired
-    private Environment environment;
-
     @Test
-    public void propertiesTest() {
-        Reader reader = FileUtil.getReader("xlsx/export_result—amazon.csv", StandardCharsets.UTF_8);
-        CsvReader csvReader = CsvUtil.getReader();
-        List<Map<String, String>> csvDataList = csvReader.readMapList(reader);
+    public void propertiesTest() throws JsonProcessingException {
+        String applicantName = "enders";
+        String respondentName = "nelson";
+        String settingName = "#user_custom_oa_e19ba5ed4a7943d8bb30a15e173f3fff#";
 
-        for (int i = 0; i < 202211; i++) {
-            String mysqlUrl = environment.getProperty("db" + i + ".datasource.url");
-            if (StringUtils.isNotBlank(mysqlUrl)) {
-                boolean checkResult = true;
-                for (Map<String, String> csvDataMap : csvDataList) {
-                    String dbStr = csvDataMap.get("\uFEFFhost") + ":" + csvDataMap.get("port") + "/" + csvDataMap.get("schemaName");
-                    if (mysqlUrl.contains(dbStr)) {
-                        checkResult = false;
-                        break;
-                    }
-                }
-                if (checkResult) {
-                    System.out.println("数据库连接不存在" + mysqlUrl);
-                }
-            }
-        }
+        String title = i18nJoin("ihr360.workflow.0251", escapes("end!@#$%^&*()_+-=~`,.<>?/\\|ers"), escapes("nelson"), "#user_custom_oa_e19ba5ed4a7943d8bb30a15e173f3fff#");
+
+        System.out.println("-----");
+        System.out.println(title);
+        System.out.println("-----");
+        System.out.println(unescapes(title));
+        System.out.println(unescapes("\\u003e"));
+
+
+        UnicodeEscaper unicodeEscaper = new UnicodeEscaper();
+        System.out.println(unicodeEscaper.translate("#$,\\&-"));
+
+        Student student = new Student();
+        String studentString = JSONObject.toJSONString(student);
+
+        Student studenta = JSONObject.parseObject(studentString, Student.class);
     }
+
+    private static String escapes(String input) throws JsonProcessingException {
+        return StringUtils.replaceEach(input, new String[]{"\\", ",", "#", "$", "&"}, new String[]{"\\u005C", "\\u002C", "\\u0023", "\\u0024", "\\u0026"});
+    }
+
+    private static String unescapes(String input) {
+        UnicodeUnescaper unicodeUnescaper = new UnicodeUnescaper();
+        return unicodeUnescaper.translate(input);
+    }
+
+    private static String i18nJoin(String i18nKey, String ...params) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("$");
+        stringBuilder.append(i18nKey);
+        stringBuilder.append("&");
+        stringBuilder.append(StringUtils.join(params, ","));
+        stringBuilder.append("$");
+        return stringBuilder.toString();
+    }
+
 }
