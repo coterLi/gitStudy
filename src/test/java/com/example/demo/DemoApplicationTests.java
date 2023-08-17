@@ -1,12 +1,18 @@
 package com.example.demo;
 
 
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.io.FileUtil;
+import cn.hutool.core.lang.tree.Tree;
+import cn.hutool.core.lang.tree.TreeNode;
+import cn.hutool.core.lang.tree.TreeUtil;
 import cn.hutool.poi.excel.ExcelUtil;
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.example.demo.i18nResolve.Student;
+import com.example.demo.sql.generate.GenerateSql;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
@@ -212,4 +218,28 @@ class DemoApplicationTests {
             str = br.readLine();
         }
     }
+
+    public static void main(String[] args) {
+        // 构建node列表
+        List<TreeNode<String>> nodeList = CollUtil.newArrayList();
+
+        nodeList.add(new TreeNode<>("1", "0", "系统管理", 5));
+        nodeList.add(new TreeNode<>("11", "1", "用户管理", 222222));
+        nodeList.add(new TreeNode<>("111", "11", "用户添加", 0));
+        nodeList.add(new TreeNode<>("2", "0", "店铺管理", 1));
+        nodeList.add(new TreeNode<>("21", "2", "商品管理", 44));
+        nodeList.add(new TreeNode<>("221", "2", "商品管理2", 2));
+
+
+        // 0表示最顶层的id是0
+        List<Tree<String>> treeList = TreeUtil.build(nodeList, "0");
+        System.out.println(treeList);
+    }
+
+    @Test
+    public void generateSql() throws IOException {
+        GenerateSql.generate();
+    }
+
+
 }

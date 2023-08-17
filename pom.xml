@@ -68,6 +68,10 @@
             <artifactId>fastjson</artifactId>
             <version>1.2.80</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
@@ -78,5 +82,23 @@
             </plugin>
         </plugins>
     </build>
+
+    <repositories>
+        <repository>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <id>Public</id>
+            <name>Public Repositories</name>
+            <url>http://nexus.irenshi.cn/nexus/content/groups/public/</url>
+        </repository>
+        <repository>
+            <id>nexus-office</id>
+            <url>http://nexus.irenshi.cn/nexus/content/groups/public/</url>
+        </repository>
+    </repositories>
 
 </project>
