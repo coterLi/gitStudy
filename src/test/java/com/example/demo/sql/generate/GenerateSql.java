@@ -15,7 +15,7 @@ public class GenerateSql {
     private static final String PUSH = "PUSH";
     private static final String APP_MY_MESSAGE = "APP_MY_MESSAGE";
     public static void generate() throws IOException {
-        BufferedReader br = FileUtil.getReader("C:\\Users\\3278\\Downloads\\msg (1).txt", Charset.forName("utf-8"));
+        BufferedReader br = FileUtil.getReader("C:\\Users\\3278\\Desktop\\数据修复.sql", Charset.forName("utf-8"));
         String str = br.readLine();
         while (str != null) {
             JSONObject message = JSONObject.parseObject(str);

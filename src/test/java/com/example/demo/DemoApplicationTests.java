@@ -12,8 +12,13 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.example.demo.i18nResolve.Student;
+import com.example.demo.sql.generate.FormatSql;
 import com.example.demo.sql.generate.GenerateSql;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import net.sf.jsqlparser.expression.Expression;
+import net.sf.jsqlparser.parser.CCJSqlParserUtil;
+import net.sf.jsqlparser.statement.Statement;
+import net.sf.jsqlparser.statement.update.Update;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.commons.lang3.time.DateUtils;
@@ -219,7 +224,7 @@ class DemoApplicationTests {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         // 构建node列表
         List<TreeNode<String>> nodeList = CollUtil.newArrayList();
 
@@ -234,12 +239,27 @@ class DemoApplicationTests {
         // 0表示最顶层的id是0
         List<Tree<String>> treeList = TreeUtil.build(nodeList, "0");
         System.out.println(treeList);
+
+        BufferedReader br = FileUtil.getReader("C:\\Users\\3278\\Desktop\\数据修复.sql", Charset.forName("utf-8"));
+        String str = br.readLine();
+        int index = str.indexOf(" #start");
+        String result = StringUtils.substring(str, 0, index);
+        System.out.println(result);
     }
 
     @Test
     public void generateSql() throws IOException {
         GenerateSql.generate();
     }
+    @Test
+    public void formatSql() throws IOException {
+        FormatSql.format();
+        System.out.println("执行完毕");
+    }
+    @Test
+    public void formatSqlV2() throws IOException {
 
-
+        FormatSql.formatV2();
+        System.out.println("执行完毕");
+    }
 }
