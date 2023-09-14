@@ -251,6 +251,12 @@ class DemoApplicationTests {
     public void generateSql() throws IOException {
         GenerateSql.generate();
     }
+
+    /**
+     * 格式化sql，去掉binlog文件中sql末尾的“#start 123295723 end 123300012 time 2023-09-11 10:48:16”字符串
+     *
+     * @throws IOException
+     */
     @Test
     public void formatSql() throws IOException {
         FormatSql.format();
