@@ -1,4 +1,4 @@
-package com.example.demo.sql.generate;
+package com.example.demo.util.sql;
 
 import cn.hutool.core.io.FileUtil;
 import com.alibaba.fastjson.JSONObject;
